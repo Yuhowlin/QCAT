@@ -40,8 +40,8 @@ def to_dataset( zdata, frequency, power ):
 def mat_to_numpy( file_name ):
 
     mat = scipy.io.loadmat( file_name )   
-    # amp = mat["ZZA"].transpose()
-    # pha = mat["ZZP"].transpose()
+    amp = mat["ZZA"].transpose()
+    pha = mat["ZZP"].transpose()
     try:
         s21 = mat["ZZI"]+1j*mat["ZZQ"]
     except:
@@ -60,6 +60,31 @@ def mat_to_numpy( file_name ):
         y = y.transpose()[0]
     xtitle = mat["xtitle"][0]
     ytitle = mat["ytitle"][0]
+    return x, y, s21
+
+def mat_to_numpy_new( file_name ):
+
+    mat = scipy.io.loadmat( file_name )   
+    # amp = mat["ZZA"].transpose()
+    # pha = mat["ZZP"].transpose()
+    try:
+        s21 = mat["ZZI"]+1j*mat["ZZQ"]
+    except:
+        s21 = mat["ZZA"]*np.exp(1j*mat["ZZP"])
+    s21 = s21.transpose()
+    x = mat["x"]
+    if x.shape[0] == 1:
+        x = x[0] 
+    else:
+        x = x.transpose()[0]
+    
+    y = mat["y"]
+    if y.shape[0] == 1:
+        y = y[0] 
+    else:
+        y = y.transpose()[0]
+    # xtitle = mat["xtitle"][0]
+    # ytitle = mat["ytitle"][0]
     return x, y, s21
 
 def mat_to_df( file_name, commonX=False ):
