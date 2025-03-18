@@ -21,7 +21,7 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "numpy>=1.26.0",
+        "numpy>=1.24.0",
         "scipy>=1.13.0",
         "matplotlib>=3.9",
         "xarray>=2024.6.0"
@@ -29,5 +29,5 @@ setup(
     # extras_require={
     #     "dev": ["pytest>=7.0", "twine>=4.0.2"],
     # },
-    python_requires=">=3.10",
+    python_requires=">=3.8",
 )
